@@ -1,0 +1,108 @@
+<resources>
+    <string name="app_name">Technician</string>
+
+    <string name="login">Login</string>
+    <string name="signup">Signup</string>
+
+    <string name="email">Enter your Email</string>
+    <string name="password">Enter your Password</string>
+
+    <string name="forgot_password">Forgot Password</string>
+
+    <string name="fullName">Enter your full name</string>
+    <string name="rePassword">Enter your password again</string>
+
+    <string name="noAccount">Don\'t have Account ?</string>
+    <string name="haveAccount">Already have account</string>
+
+    <string name="skip">Skip >></string>
+    <string name="showMap">Show Map</string>
+
+    <string name="title_activity_maps">MapsActivity</string>
+
+    <string name="personal_services">Personal Services</string>
+    <string name="home_services">Home Services</string>
+    <string name="home_appliance">Home Appliance</string>
+
+    <string name="todo">TODO</string>
+    <string name="cardText">Card Text</string>
+    <string name="sampleText">This is Sample text</string>
+
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="booking">Booking</string>
+    <string name="notification">Notifications</string>
+
+    <string name="empty_booking">Nothing ate</string>
+    <string name="profile_text">Profile will be display here</string>
+    <string name="no_notification">No Notifications to Show</string>
+    <string name="profile_fragment">Profile Fragment</string>
+    <string name="logout">Logout</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="delete_account_massage">Deleting this Account will remove everything from our system
+        and you won\'t be able to access your information</string>
+    <string name="speak_now">Speak now</string>
+    <string name="profile_name">Name :</string>
+    <string name="profile_email">Email :</string>
+    <string name="change">change</string>
+    <string name="save">Save</string>
+    <string name="salon_for_men">Salon for men</string>
+    <string name="dummyText">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+    <string name="estimate_time">Estimate Time</string>
+    <string name="demo_time">20 min</string>
+    <string name="add_item">Add Items</string>
+    <string name="cancel">Cancel</string>
+    <string name="price_per_item">Price per item</string>
+    <string name="demo_price">0 RS</string>
+    <string name="default_items">0</string>
+    <string name="total_price">Total Price</string>
+    <string name="total_items">Total Items</string>
+
+    <string name="demo_items">0</string>
+    <string name="default_price">256 RS</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="are_you_sure">Are you sure ?</string>
+    <string name="do_you_want_to_sign_out">Do you want to sign out</string>
+    <string name="dummy_email">dummy@mail.com</string>
+    <string name="enter_your_name">Enter your Name</string>
+    <string name="enter_phone_number">Enter Phone number</string>
+    <string name="dob">Date of borth</string>
+    <string name="label_1">Male</string>
+    <string name="label_2">Female</string>
+    <string name="gender">Gender</string>
+    <string name="total_balance">Total Balance</string>
+    <string name="currency_symbol">₹</string>
+    <string name="dummy_balance">1000</string>
+    <string name="add_money">Add Money</string>
+    <string name="withdraw">Withdraw</string>
+    <string name="choose_date">Choose Date</string>
+    <string name="dummy_date">19 feb 2022</string>
+    <string name="choose_time">Choose Time</string>
+    <string name="address">Address</string>
+    <string name="location">Location</string>
+    <string name="current_location">Current Location</string>
+    <string name="pick_time">Pick Time</string>
+    <string name="pick_date">Pick Date</string>
+    <string name="service_for_male">Service For Male</string>
+    <string name="service_for_female">Service For Female</string>
+    <string name="total_services">Total Services:</string>
+    <string name="status">Status</string>
+    <string name="update">Update</string>
+    <string name="dummy_name">Dummy Name</string>
+    <string name="enter_your_email">Enter Your Email</string>
+    <string name="hello_blank_fragment">Blank Fragment</string>
+    <string name="bookings">Bookings</string>
+    <string name="upload_certificate">Upload Certificate</string>
+    <string name="approval_status">Your Account not verified yet \nWhen your account is verified \nwe will let you know</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="choose_role">Choose Role</string>
+
+
+    <string-array name="technical_roles">
+        <item>Personal Service</item>
+        <item>Home Service</item>
+        <item>Repair Home Appliance</item>
+    </string-array>
+
+
+</resources>

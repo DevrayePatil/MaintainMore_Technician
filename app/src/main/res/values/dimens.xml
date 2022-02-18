@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="empty_fragment_text">26sp</dimen>
+    <dimen name="profile_text">18sp</dimen>
+    <dimen name="normal_margin">10dp</dimen>
+
+    <dimen name="bottom_sheet_header_text_size">24sp</dimen>
+    <dimen name="bottom_sheet_text_size">16sp</dimen>
+
+    <dimen name="normal_half_margin">5dp</dimen>
+
+    <dimen name="profile_text_size">22sp</dimen>
+
+    <dimen name="heading_text">18sp</dimen>
+    <dimen name="drop_down_text">16sp</dimen>
+
+</resources>

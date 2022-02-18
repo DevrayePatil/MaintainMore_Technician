@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "1016652962217",
+    "project_id": "maintainmore-9cc82",
+    "storage_bucket": "maintainmore-9cc82.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1016652962217:android:a584980fd7ebd1948e4cb8",
+        "android_client_info": {
+          "package_name": "com.example.maintainmore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaaI3vuZL9EfX63c1PEgAsZ9W-oEMAEQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1016652962217:android:1c3754c2e0ae4d108e4cb8",
+        "android_client_info": {
+          "package_name": "com.example.maintainmoreadministrator"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaaI3vuZL9EfX63c1PEgAsZ9W-oEMAEQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1016652962217:android:982135562f2fcde68e4cb8",
+        "android_client_info": {
+          "package_name": "com.technician.maintainmore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaaI3vuZL9EfX63c1PEgAsZ9W-oEMAEQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
