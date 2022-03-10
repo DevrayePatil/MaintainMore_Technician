@@ -5,11 +5,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -21,6 +23,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,9 +44,9 @@ public class CompleteProfileActivity extends AppCompatActivity {
     private static final int IMAGE_REQUEST_ID = 0;
     private static final int CERTIFICATE_IMAGE_REQUEST_ID = 1;
     private static final String TAG = "CompleteProfileActivityInfo";
-    String chooseGender;
-    String serviceCertificateUrl = "";
 
+    String selectGender = "";
+    String serviceCertificateUrl;
 
     String technicianID;
 
@@ -71,7 +75,7 @@ public class CompleteProfileActivity extends AppCompatActivity {
 
 
     RadioGroup radioGroup;
-    RadioButton radioButton;
+    RadioButton radioButtonMale, radioButtonFemale;
 
 
     protected void onStart() {
@@ -110,10 +114,13 @@ public class CompleteProfileActivity extends AppCompatActivity {
         super.onStart();
     }
 
+    @SuppressLint("LongLogTag")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete_profile);
+
+        Log.i(TAG, "CompleteActivity");
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -123,44 +130,31 @@ public class CompleteProfileActivity extends AppCompatActivity {
 
         technicianID = Objects.requireNonNull(firebaseUser).getUid();
 
+
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-        displayName = findViewById(R.id.displayName);
-        displayEmail = findViewById(R.id.displayEmail);
-
-        profilePicture = findViewById(R.id.profilePicture);
-
-        serviceCertificate = findViewById(R.id.serviceCertificate);
-
-        fullName = findViewById(R.id.textInputLayout_FullName);
-        email = findViewById(R.id.textInputLayout_Email);
-        phoneNumber = findViewById(R.id.textInputLayout_Phone);
-        dateOfBirth = findViewById(R.id.textInputLayout_DOB);
-
-        radioGroup = findViewById(R.id.radioGroup);
-        chooseTechnicalRole = findViewById(R.id.chooseTechnicalRole);
-
-        buttonCancel = findViewById(R.id.buttonCancel);
-        buttonSave = findViewById(R.id.buttonSave);
-
+        LinkIDes();
 
         email.setEnabled(false);
 
-
-        buttonChooseIcon = findViewById(R.id.buttonChangePicture);
-        buttonChooseCertificate = findViewById(R.id.buttonChooseServiceCertificate);
-
         buttonChooseIcon.setOnClickListener(view -> ChooseIcon());
+        dateOfBirth.setOnClickListener(view -> DatePickerDateOfBirth());
         buttonChooseCertificate.setOnClickListener(view -> ChooseCertificateImage());
 
-        buttonCancel.setOnClickListener(view -> finishAffinity());
+        buttonCancel.setOnClickListener(view -> firebaseAuth.signOut());
         buttonSave.setOnClickListener(view -> SaveInformationToDB());
+
+        radioGroup.setOnCheckedChangeListener((radioGroup, i) -> {
+            if (i == R.id.radioButtonMale) {
+                selectGender = radioButtonMale.getText().toString();
+            } else if (i == R.id.radioButtonFemale) {
+                selectGender = radioButtonFemale.getText().toString();
+            }
+        });
 
         LoginUserInfo();
         InformationFromDB();
-
 
         List<String> choose_role = Arrays.asList(getResources().getStringArray(R.array.technical_roles));
 
@@ -170,14 +164,27 @@ public class CompleteProfileActivity extends AppCompatActivity {
 
     }
 
+
+    private void DatePickerDateOfBirth() {
+        long today = MaterialDatePicker.todayInUtcMilliseconds();
+
+        CalendarConstraints.Builder constraintBuilder = new CalendarConstraints.Builder();
+//        constraintBuilder.setValidator(DateValidatorPointForward.now());
+
+        MaterialDatePicker.Builder<Long> builder = MaterialDatePicker.Builder.datePicker();
+        builder.setTitleText("Choose Date");
+        builder.setSelection(today);
+        builder.setCalendarConstraints(constraintBuilder.build());
+
+
+        MaterialDatePicker<Long> materialDatePicker = builder.build();
+        materialDatePicker.show(getSupportFragmentManager(),"DATE_PICKET");
+        materialDatePicker.addOnPositiveButtonClickListener(selection ->
+                dateOfBirth.setText(materialDatePicker.getHeaderText())
+        );
+    }
+
     private void SaveInformationToDB() {
-
-
-        int radioButtonID = radioGroup.getCheckedRadioButtonId();
-        radioButton = findViewById(radioButtonID);
-        chooseGender = radioButton.getText().toString();
-
-        email.setEnabled(false);
 
         String FullName = Objects.requireNonNull(fullName.getText()).toString();
 //        String EmailID = email.getText().toString();
@@ -190,15 +197,27 @@ public class CompleteProfileActivity extends AppCompatActivity {
             Toast.makeText(this, "Please Enter your Name", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (selectGender.equals("")){
+            Toast.makeText(this, "Please select gender", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (PhoneNumber.equals("")){
             Toast.makeText(this, "Please Enter your Phone number", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (technicalRole.equals("")){
+            Toast.makeText(this, "Please Choose technical Role", Toast.LENGTH_SHORT).show();
             return;
         }
         if (DOB.equals("")){
             Toast.makeText(this, "Please Enter your Date of Birth", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (serviceCertificateUrl.equals("")){
+        if (serviceCertificateUrl == null) {
+            Toast.makeText(this, "Please Choose Certificate", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else if (serviceCertificateUrl.equals("")) {
             Toast.makeText(this, "Please Upload Certificate", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -206,7 +225,7 @@ public class CompleteProfileActivity extends AppCompatActivity {
 
         db.collection("Technicians").document(technicianID).update(
                 "name", FullName,
-                "gender", chooseGender,
+                "gender", selectGender,
                 "phoneNumber", PhoneNumber,
                 "dob", DOB,
                 "technicalRole", technicalRole,
@@ -223,14 +242,7 @@ public class CompleteProfileActivity extends AppCompatActivity {
 
     private void InformationFromDB() {
 
-        RadioButton radioButtonMale, radioButtonFemale;
-
-        radioButtonMale = findViewById(R.id.radio_button_1);
-        radioButtonFemale = findViewById(R.id.radio_button_2);
-
-
         documentReference = db.collection("Technicians").document(technicianID);
-
         documentReference.addSnapshotListener((value, error) -> {
             if (error != null) {
                 Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
@@ -245,11 +257,12 @@ public class CompleteProfileActivity extends AppCompatActivity {
                 Glide.with(getApplicationContext()).load(value.getString("serviceCertificate"))
                         .placeholder(R.drawable.ic_person).into(serviceCertificate);
 
+
                 String genderValue = value.getString("gender");
 
                 if (Objects.equals(genderValue, "Male")){
                     radioButtonMale.setChecked(true);
-                }else {
+                }else if (Objects.equals(genderValue, "Female")){
                     radioButtonFemale.setChecked(true);
                 }
             }
@@ -290,6 +303,32 @@ public class CompleteProfileActivity extends AppCompatActivity {
     }
 
 
+    private void LinkIDes() {
+        displayName = findViewById(R.id.displayName);
+        displayEmail = findViewById(R.id.displayEmail);
+
+        profilePicture = findViewById(R.id.profilePicture);
+
+        serviceCertificate = findViewById(R.id.serviceCertificate);
+
+        fullName = findViewById(R.id.textInputLayout_FullName);
+        email = findViewById(R.id.textInputLayout_Email);
+        phoneNumber = findViewById(R.id.textInputLayout_Phone);
+        dateOfBirth = findViewById(R.id.textInputLayout_DOB);
+
+        radioGroup = findViewById(R.id.radioGroup);
+        radioButtonMale = findViewById(R.id.radioButtonMale);
+        radioButtonFemale = findViewById(R.id.radioButtonFemale);
+
+
+        chooseTechnicalRole = findViewById(R.id.chooseTechnicalRole);
+
+        buttonChooseIcon = findViewById(R.id.buttonChangePicture);
+        buttonChooseCertificate = findViewById(R.id.buttonChooseServiceCertificate);
+
+        buttonCancel = findViewById(R.id.buttonCancel);
+        buttonSave = findViewById(R.id.buttonSave);
+    }
 
 
 
@@ -338,7 +377,7 @@ public class CompleteProfileActivity extends AppCompatActivity {
                             serviceCertificateUrl = String.valueOf(uri));
                     Toast.makeText(getApplicationContext(), "Picture Saved", Toast.LENGTH_SHORT).show();
 
-                }).addOnFailureListener(e -> Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show());
+                }).addOnFailureListener(e -> Toast.makeText(getApplicationContext(), "Failed"+ e, Toast.LENGTH_SHORT).show());
             }
             catch (IOException e){
                 e.printStackTrace();

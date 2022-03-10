@@ -103,7 +103,7 @@ public class EditProfileActivity extends AppCompatActivity {
         buttonChangePicture.setOnClickListener(view -> ChangePicture());
 
         dateOfBirth.setShowSoftInputOnFocus(false);
-        dateOfBirth.setOnClickListener(view -> DatePickerForDOB());
+        dateOfBirth.setOnClickListener(view -> DatePickerDateOfBirth());
 
 
 
@@ -210,11 +210,11 @@ public class EditProfileActivity extends AppCompatActivity {
                 phoneNumber.setText(value.getString("phoneNumber"));
                 dateOfBirth.setText(value.getString("dob"));
 
-                String genderValue = value.getString("gender");
+                String technicianGender = value.getString("gender");
 
-                if (Objects.equals(genderValue, "Male")){
+                if (Objects.equals(technicianGender, "Male")){
                     radioButtonMale.setChecked(true);
-                }else {
+                }else if(Objects.equals(technicianGender, "Female")){
                     radioButtonFemale.setChecked(true);
                 }
             }
@@ -231,7 +231,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     }
 
-    private void DatePickerForDOB() {
+    private void DatePickerDateOfBirth() {
 
         long today = MaterialDatePicker.todayInUtcMilliseconds();
 

@@ -66,7 +66,7 @@
     <string name="dummy_email">dummy@mail.com</string>
     <string name="enter_your_name">Enter your Name</string>
     <string name="enter_phone_number">Enter Phone number</string>
-    <string name="dob">Date of borth</string>
+    <string name="dob">Date of Birth</string>
     <string name="label_1">Male</string>
     <string name="label_2">Female</string>
     <string name="gender">Gender</string>
@@ -85,7 +85,7 @@
     <string name="pick_date">Pick Date</string>
     <string name="service_for_male">Service For Male</string>
     <string name="service_for_female">Service For Female</string>
-    <string name="total_services">Total Services:</string>
+    <string name="total_services">Total Services</string>
     <string name="status">Status</string>
     <string name="update">Update</string>
     <string name="dummy_name">Dummy Name</string>
@@ -96,6 +96,26 @@
     <string name="approval_status">Your Account not verified yet \nWhen your account is verified \nwe will let you know</string>
     <string name="sign_out">Sign Out</string>
     <string name="choose_role">Choose Role</string>
+    <string name="home_fragment">Home Fragment</string>
+    <string name="bookings_fragment">Bookings Fragment</string>
+    <string name="user_name">User Name</string>
+    <string name="user_email">User Email</string>
+    <string name="user_phone_no">Phone No.</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="visiting_date">Visiting Date</string>
+    <string name="visiting_time">Visiting Time</string>
+    <string name="user_details">User Details</string>
+    <string name="booking_details">Booking Details</string>
+
+    <string name="service_name">Service Name</string>
+    <string name="service_description">Service Description</string>
+    <string name="price_per_service">Price Per Service</string>
+    <string name="required_time_per_service">Required Time Per Service</string>
+    <string name="booking_date">Booking Date</string>
+    <string name="booking_time">Booking Time</string>
+    <string name="service_completed">Service Completed</string>
+    <string name="direction">Direction</string>
+    <string name="direction_instruction">click on map to get direction</string>
 
 
     <string-array name="technical_roles">

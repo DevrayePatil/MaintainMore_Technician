@@ -9,9 +9,11 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +30,9 @@ public class SignupActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
     FirebaseFirestore db;
+
+    String notificationToken;
+
 
 
     Button buttonLogin, buttonSignup;
@@ -55,6 +60,17 @@ public class SignupActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                        return;
+                    }
+                    // Get new FCM registration token
+                    notificationToken = task.getResult();
+                });
 
 
         buttonSignup.setOnClickListener(view -> signUp());
@@ -117,23 +133,28 @@ public class SignupActivity extends AppCompatActivity {
 
                             String userID = Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getUser()).getUid();
 
-                            Map<String, String> user = new HashMap<>();
-                            user.put("name", userName);
-                            user.put("email", emailId);
-                            user.put("password", Password);
-                            user.put("walletBalanceInINR","0");
-                            user.put("approvalStatus","Registered");
+                            Map<String, String> technician = new HashMap<>();
+                            technician.put("name", userName);
+                            technician.put("email", emailId);
+                            technician.put("password", Password);
+                            technician.put("walletBalanceInINR","0");
+                            technician.put("approvalStatus","Registered");
+                            technician.put("notificationToken",notificationToken);
+                            technician.put("availabilityStatus","Free");
 
-                            db.collection("Technicians").document(userID).set(user);
-
-                            new SweetAlertDialog(SignupActivity.this,SweetAlertDialog.SUCCESS_TYPE).setTitleText("SignUp Successful")
+                            db.collection("Technicians").document(userID).set(technician)
+                                    .addOnSuccessListener(unused ->
+                                            new SweetAlertDialog(SignupActivity.this,SweetAlertDialog.SUCCESS_TYPE).setTitleText("SignUp Successful")
                                     .setConfirmClickListener(sweetAlertDialog -> {
 
                                         FirebaseAuth.getInstance().signOut();
                                         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                                         sweetAlertDialog.dismissWithAnimation();
 
-                                    }).show();
+                                    }).show())
+                            .addOnFailureListener(e -> Toast.makeText(SignupActivity.this, "failed"+e, Toast.LENGTH_SHORT).show());
+
+
 
                         } else {
 

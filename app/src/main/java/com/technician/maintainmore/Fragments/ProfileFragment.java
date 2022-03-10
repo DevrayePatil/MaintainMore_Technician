@@ -38,6 +38,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class ProfileFragment extends Fragment {
 
     private static final String TAG = "ProfileFragmentInfo";
+    String technicianID;
 
     FirebaseStorage firebaseStorage;
     StorageReference storageReference;
@@ -95,7 +96,8 @@ public class ProfileFragment extends Fragment {
 
             documentReference.addSnapshotListener((value, error) -> {
                 if (error != null) {
-                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Error" + error, Toast.LENGTH_SHORT).show();
+                    Log.i("Error:", error.getMessage());
                 }
                 if (value != null && value.exists()){
                     displayName.setText(value.getString("name"));
