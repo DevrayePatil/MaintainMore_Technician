@@ -44,10 +44,6 @@ public class AssignedServiceAdapter extends RecyclerView.Adapter<AssignedService
 
         holder.displayServiceName.setText(modal.getServiceName());
 
-        holder.displayUserName.setText(modal.getUserName());
-        holder.displayUserEmail.setText(modal.getUserEmail());
-        holder.displayUserPhoneNumber.setText(modal.getUserPhoneNumber());
-
         holder.displayTotalServices.setText(modal.getTotalServices());
         holder.displayTotalAmount.setText(modal.getTotalServicesPrice());
         holder.displayVisitingDate.setText(modal.getVisitingDate());

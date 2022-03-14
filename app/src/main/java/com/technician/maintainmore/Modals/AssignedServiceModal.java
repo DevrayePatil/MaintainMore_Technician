@@ -2,20 +2,22 @@ package com.technician.maintainmore.Modals;
 
 public class AssignedServiceModal {
 
-    String whoBookedService, userName, userEmail, userPhoneNumber,
-            bookingID, serviceIcon, serviceName, totalServices, servicePrice, totalServicesPrice,
+    String bookingID, whoBookedService,
+            serviceIcon, serviceName, serviceDescription,
+            totalServices, pricePerService, totalServicesPrice,
             bookingDate, bookingTime, visitingDate, visitingTime;
 
-    public AssignedServiceModal(String whoBookedService, String userName, String userEmail, String userPhoneNumber, String bookingID, String serviceIcon, String serviceName, String totalServices, String servicePrice, String totalServicesPrice, String bookingDate, String bookingTime, String visitingDate, String visitingTime) {
-        this.whoBookedService = whoBookedService;
-        this.userName = userName;
-        this.userEmail = userEmail;
-        this.userPhoneNumber = userPhoneNumber;
+    public AssignedServiceModal(String bookingID, String whoBookedService,
+                                String serviceIcon, String serviceName, String serviceDescription,
+                                String totalServices, String pricePerService, String totalServicesPrice,
+                                String bookingDate, String bookingTime, String visitingDate, String visitingTime) {
         this.bookingID = bookingID;
+        this.whoBookedService = whoBookedService;
         this.serviceIcon = serviceIcon;
         this.serviceName = serviceName;
+        this.serviceDescription = serviceDescription;
         this.totalServices = totalServices;
-        this.servicePrice = servicePrice;
+        this.pricePerService = pricePerService;
         this.totalServicesPrice = totalServicesPrice;
         this.bookingDate = bookingDate;
         this.bookingTime = bookingTime;
@@ -31,29 +33,6 @@ public class AssignedServiceModal {
         this.whoBookedService = whoBookedService;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
-    public String getUserPhoneNumber() {
-        return userPhoneNumber;
-    }
-
-    public void setUserPhoneNumber(String userPhoneNumber) {
-        this.userPhoneNumber = userPhoneNumber;
-    }
 
     public String getBookingID() {
         return bookingID;
@@ -87,12 +66,12 @@ public class AssignedServiceModal {
         this.totalServices = totalServices;
     }
 
-    public String getServicePrice() {
-        return servicePrice;
+    public String getPricePerService() {
+        return pricePerService;
     }
 
-    public void setServicePrice(String servicePrice) {
-        this.servicePrice = servicePrice;
+    public void setPricePerService(String pricePerService) {
+        this.pricePerService = pricePerService;
     }
 
     public String getTotalServicesPrice() {

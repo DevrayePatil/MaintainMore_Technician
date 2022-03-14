@@ -7,13 +7,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,7 +25,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 
-public class AssignedBookingsFragment extends Fragment implements AssignedServiceAdapter.viewHolder.OnAssignedServiceClickListener{
+public class AssignedBookingsFragment extends Fragment
+        implements AssignedServiceAdapter.viewHolder.OnAssignedServiceClickListener{
 
 //    private static final String TAG = "AssignedBookingsFragmentInfo";
 
@@ -44,12 +41,7 @@ public class AssignedBookingsFragment extends Fragment implements AssignedServic
     public AssignedBookingsFragment() {
         // Required empty public constructor
     }
-
     ArrayList<AssignedServiceModal> serviceModals = new ArrayList<>();
-
-    String whoBookedService, userName, userEmail, userPhoneNumber;
-    String bookingID, serviceIconUrl, serviceName, totalServices,servicePrice, totalServicesPrice;
-    String bookingDate, bookingTime, visitingDate, visitingTime;
 
 
     @Override
@@ -64,7 +56,6 @@ public class AssignedBookingsFragment extends Fragment implements AssignedServic
 
         technicianID = Objects.requireNonNull(firebaseUser).getUid();
 
-
         recyclerView_assignedServices = view.findViewById(R.id.recyclerView_assignedServices);
 
 
@@ -75,44 +66,14 @@ public class AssignedBookingsFragment extends Fragment implements AssignedServic
 
                 if (Objects.equals(snapshot.getString("bookingStatus"), "Booked")) {
 
-                    whoBookedService = snapshot.getString("whoBookedService");
-                    assert whoBookedService != null;
-
-                    db.collection("Users").document(whoBookedService).addSnapshotListener((value1, error1) -> {
-                        if (error1 != null) {
-                            Toast.makeText(getActivity(), "Error" + error1, Toast.LENGTH_SHORT).show();
-                            Log.i("Error:", error1.getMessage());
-                        }
-                        if (value1 != null && value1.exists()) {
-                            userName = value1.getString("name");
-                            userEmail = value1.getString("email");
-                            userPhoneNumber = value1.getString("phoneNumber");
-
-                        }
-                    });
-
-                    bookingID = snapshot.getId();
-                    serviceIconUrl = snapshot.getString("serviceIcon");
-                    serviceName = snapshot.getString("serviceName");
-                    totalServices = snapshot.getString("totalServices");
-                    servicePrice = snapshot.getString("servicePrice");
-                    totalServicesPrice = snapshot.getString("totalServicesPrice");
-
-                    bookingDate = snapshot.getString("bookingDate");
-                    bookingTime = snapshot.getString("bookingTime");
-                    visitingDate = snapshot.getString("visitingDate");
-                    visitingTime = snapshot.getString("visitingTime");
-
-
-                    Toast.makeText(requireActivity(), "name :" + userName, Toast.LENGTH_SHORT).show();
-
                     serviceModals.add(new AssignedServiceModal(
-                            whoBookedService, userName, userEmail, userPhoneNumber,
-                            bookingID, serviceIconUrl, serviceName,
-                            totalServices, servicePrice,
-                            totalServicesPrice, bookingDate,
-                            bookingTime, visitingDate,
-                            visitingTime
+                            snapshot.getId(), snapshot.getString("whoBookedService"),
+                            snapshot.getString("serviceIcon"), snapshot.getString("serviceName"),
+                            snapshot.getString("serviceDescription"),
+                            snapshot.getString("totalServices"), snapshot.getString("servicePrice"),
+                            snapshot.getString("totalServicesPrice"),
+                            snapshot.getString("bookingDate"), snapshot.getString("bookingTime"),
+                            snapshot.getString("visitingDate"), snapshot.getString("visitingTime")
                     ));
 
                 }
