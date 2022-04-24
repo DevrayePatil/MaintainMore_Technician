@@ -58,7 +58,6 @@ public class CompletedBookingsFragment extends Fragment
             serviceModals.clear();
             assert value != null;
             for (DocumentSnapshot snapshot: value) {
-
                 if (Objects.equals(snapshot.getString("bookingStatus"), "Completed")) {
 
                     serviceModals.add(new AssignedServiceModal(
@@ -74,7 +73,6 @@ public class CompletedBookingsFragment extends Fragment
             }
             AssignedServiceAdapter serviceAdapter = new AssignedServiceAdapter(serviceModals, getContext(), this);
             recyclerView_completedServices.setAdapter(serviceAdapter);
-
         });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView_completedServices.setLayoutManager(linearLayoutManager);
