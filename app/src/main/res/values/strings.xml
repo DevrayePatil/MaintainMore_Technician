@@ -116,6 +116,8 @@
     <string name="service_completed">Service Completed</string>
     <string name="direction">Direction</string>
     <string name="direction_instruction">click on map to get direction</string>
+    <string name="assigned_bookings">Assigned Bookings</string>
+    <string name="completed_bookings">Completed Bookings</string>
 
 
     <string-array name="technical_roles">

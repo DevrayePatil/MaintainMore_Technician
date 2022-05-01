@@ -4,16 +4,32 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.technician.maintainmore.R;
+
+import java.util.Objects;
 
 
 public class HomeFragment extends Fragment {
 
 
+    FirebaseFirestore db;
+
+    FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
+
+    String technicianID;
+
+    TextView displayNumberOfAssignedBookings, displayNumberOfCompletedBookings;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -25,6 +41,41 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+
+        db = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        technicianID = Objects.requireNonNull(firebaseUser).getUid();
+
+
+        displayNumberOfAssignedBookings = view.findViewById(R.id.displayNumberOfAssignedBookings);
+        displayNumberOfCompletedBookings = view.findViewById(R.id.displayNumberOfCompletedBookings);
+
+
+        db.collection("Bookings").whereEqualTo("assignedTechnician", technicianID)
+                .whereEqualTo("bookingStatus", "Booked")
+                .addSnapshotListener((value, error) -> {
+                    assert value != null;
+
+//                    Toast.makeText(requireActivity(), "size"  + value.size(), Toast.LENGTH_SHORT).show();
+                    displayNumberOfAssignedBookings.setText(String.valueOf(value.size()));
+
+                });
+
+        db.collection("Bookings Completed").whereEqualTo("assignedTechnician", technicianID)
+                .whereEqualTo("bookingStatus", "Completed")
+                .addSnapshotListener((value, error) -> {
+                    assert value != null;
+
+//                    Toast.makeText(requireActivity(), "size"  + value.size(), Toast.LENGTH_SHORT).show();
+                    displayNumberOfCompletedBookings.setText(String.valueOf(value.size()));
+
+
+                });
+
+        return view;
     }
 }
