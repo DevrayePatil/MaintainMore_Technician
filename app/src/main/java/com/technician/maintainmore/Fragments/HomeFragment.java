@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,6 +19,8 @@ import java.util.Objects;
 
 
 public class HomeFragment extends Fragment {
+
+    private static final String TAG = "HomeFragmentInfo";
 
 
     FirebaseFirestore db;
@@ -60,7 +61,7 @@ public class HomeFragment extends Fragment {
                 .addSnapshotListener((value, error) -> {
                     assert value != null;
 
-//                    Toast.makeText(requireActivity(), "size"  + value.size(), Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, String.valueOf(value.size()));
                     displayNumberOfAssignedBookings.setText(String.valueOf(value.size()));
 
                 });

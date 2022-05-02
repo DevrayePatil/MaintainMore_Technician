@@ -28,7 +28,6 @@ import com.technician.maintainmore.EditProfileActivity;
 import com.technician.maintainmore.LoginActivity;
 import com.technician.maintainmore.R;
 import com.technician.maintainmore.SettingsActivity;
-import com.technician.maintainmore.WalletActivity;
 
 import java.util.Objects;
 
@@ -115,7 +114,7 @@ public class ProfileFragment extends Fragment {
 
     private void ProfileList() {
 
-        String[] cities = {"My Wallet", "Settings", "Delete Account", "Sign Out"};
+        String[] cities = {"Settings", "Delete Account", "Sign Out"};
 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
@@ -127,18 +126,14 @@ public class ProfileFragment extends Fragment {
 
             switch (i){
                 case 0:
-                    Log.i(TAG, "My Wallet");
-                    MyWallet();
-                    break;
-                case 1:
                     Log.i(TAG, "Settings");
                     Settings();
                     break;
-                case 2:
+                case 1:
                     Log.i(TAG, "Delete Account");
                     DeleteAccount();
                     break;
-                case 3:
+                case 2:
                     Log.i(TAG, "Sign Out");
                     SignOut();
                     break;
@@ -207,9 +202,6 @@ public class ProfileFragment extends Fragment {
     }
 
 
-    private void MyWallet() {
-        startActivity(new Intent(getActivity(), WalletActivity.class));
-    }
 
 
 
