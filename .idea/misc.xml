@@ -23,6 +23,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreTechnician/app/src/main/res/drawable/ic_image_placeholder.xml" value="0.143" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreTechnician/app/src/main/res/drawable/ic_technical_role.xml" value="0.174" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreTechnician/app/src/main/res/drawable/ic_technician_logo.xml" value="0.174" />
+        <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreTechnician/app/src/main/res/drawable/ic_technician_logo_foreground.xml" value="0.174" />
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreTechnician/app/src/main/res/layout/activity_application_status.xml" value="0.25" />
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreTechnician/app/src/main/res/layout/activity_assigned_service_details.xml" value="0.25" />
         <entry key="..\:/DYPIMCAM/Second_Year/III_Sem/Mini_project/AllApps/MaintainMoreTechnician/app/src/main/res/layout/activity_certificate_view.xml" value="0.2222222222222222" />
